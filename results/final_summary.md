@@ -19,7 +19,7 @@ Seasonality is heterogeneous. The strongest high/medium-confidence categories by
 | home_confort           |            246 |            0.580433 |           11 |              3 | event_driven       |
 | musical_instruments    |            241 |            0.572599 |           11 |              4 | event_driven       |
 
-Product-level appendix is available in `results/tables/product_seasonality_ranking.csv`; product IDs should be interpreted through their category because Olist has no readable product names.
+Product-level appendix is available in `results/tables/product_seasonality_ranking.csv` and `results/figures/38_top20_seasonal_products_appendix.png`; product IDs should be interpreted through their category because Olist has no readable product names. The presentation-first category visuals are `35_top_seasonal_categories_with_peak_month.png` and `36_top6_category_monthly_profiles.png`.
 
 ### What types of seasonality appear?
 
@@ -27,11 +27,11 @@ The project distinguishes monthly/calendar, quarterly, event-driven, weekly, tre
 
 ### Business impact
 
-Peak months for seasonal categories are compared to normal months in `results/tables/business_impact_peak_vs_normal.csv`. The comparison covers orders, revenue, average order value, large purchases, installments, freight, delivery time and review score.
+Peak months for seasonal categories are compared to normal months in `results/tables/business_impact_peak_vs_normal.csv`. Paired category uplift is in `results/tables/business_impact_by_category_uplift.csv`, and revenue decomposition is in `results/tables/business_revenue_decomposition_peak_vs_normal.csv`. The comparison covers orders, revenue, average order value, large purchases, installments, freight, delivery time and review score.
 
 ### Large purchases
 
-Large purchases are defined as item-level `price >= P90`, i.e. top-10% most expensive goods. Sensitivity thresholds for top-5%, top-15% and top-20% are in `results/tables/large_purchase_price_thresholds.csv`. Revenue distributions by month/quarter/week/weekday are in `results/tables/large_purchase_revenue_by_*.csv`. Highest top-10% revenue-distribution months:
+Large purchases are defined as item-level `price >= P90`, i.e. top-10% most expensive goods. Sensitivity thresholds for top-5%, top-15% and top-20% are in `results/tables/large_purchase_price_thresholds.csv`. Revenue distributions by month/quarter/week/weekday are in `results/tables/large_purchase_revenue_by_*.csv`; Black Friday/Q4 window, category mix, and installments are in `large_purchase_black_friday_window.csv`, `large_purchase_category_mix_peak_vs_normal.csv`, and `large_purchase_installments_by_month.csv`. Highest top-10% revenue-distribution months:
 
 |   month |   large_revenue_top10 |   large_revenue_distribution_top10 |   large_revenue_share_of_period_top10 |
 |--------:|----------------------:|-----------------------------------:|--------------------------------------:|
@@ -43,7 +43,7 @@ Large purchases are defined as item-level `price >= P90`, i.e. top-10% most expe
 
 ### Can seasonality be predicted?
 
-A category-level feature model was trained with target `is_seasonal = top quartile by seasonality score`. Result: ROC-AUC 0.33, F1 0.00. Feature importances are in `results/tables/model_feature_importance.csv` and figure `results/figures/13_seasonality_feature_importance.png`.
+A category-level feature model was trained with target `is_seasonal = top quartile by seasonality score`. Result: ROC-AUC 0.33, F1 0.00. A stricter early-signal model uses only Jan–Jun features to predict Jul–Dec seasonality: ROC-AUC 0.70, F1 0.40. Feature importances are in `results/tables/model_feature_importance.csv` and `results/tables/early_seasonality_feature_importance.csv`.
 
 ### How to forecast demand?
 

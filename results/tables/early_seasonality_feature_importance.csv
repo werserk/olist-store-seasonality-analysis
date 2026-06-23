@@ -1,0 +1,12 @@
+feature,importance
+h1_revenue,0.20287883909835447
+h1_seller_state_nunique,0.11584539325762272
+h1_share_installments_6_plus,0.1016392242838513
+h1_weekday_concentration,0.10035996419741558
+h1_avg_payment_installments,0.09977043750904405
+h1_orders,0.09825371531347177
+h1_freight_share,0.09477001942007628
+h1_avg_item_price,0.06861363744043057
+h1_customer_state_nunique,0.050920703681168196
+h1_growth_jan_to_jun,0.034463542963054455
+h1_avg_review_score,0.03248452283551077

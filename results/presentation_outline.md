@@ -42,7 +42,10 @@ Top high/medium-confidence seasonal categories:
 | home_confort           |            246 |            0.580433 |           11 |              3 | event_driven       | high               |
 | musical_instruments    |            241 |            0.572599 |           11 |              4 | event_driven       | high               |
 
-Figure: `results/figures/05_top_seasonal_categories.png`.
+Figures:
+- `results/figures/35_top_seasonal_categories_with_peak_month.png`
+- `results/figures/36_top6_category_monthly_profiles.png`
+- `results/figures/05_top_seasonal_categories.png` as appendix.
 
 ## Slide 6 — Seasonality types
 
@@ -51,6 +54,7 @@ Show category × month heatmap and cluster heatmap. Explain that we identify mul
 Figures:
 - `results/figures/06_category_month_seasonal_index_heatmap.png`
 - `results/figures/07_seasonality_type_clusters.png`
+- `results/figures/37_seasonality_type_composition.png`
 
 ## Slide 7 — Event-driven and weekly patterns
 
@@ -79,7 +83,10 @@ Compare peak vs normal months for seasonal categories.
 | avg_review_score             |           4.13  |         4.064 |      -0.016 |
 | share_low_reviews            |           0.136 |         0.14  |       0.033 |
 
-Figure: `results/figures/10_peak_vs_normal_business_metrics.png`.
+Figures:
+- `results/figures/10_peak_vs_normal_business_metrics.png`
+- `results/figures/39_business_impact_by_category_uplift.png`
+- `results/figures/40_revenue_decomposition_peak_vs_normal.png`
 
 ## Slide 9 — Large purchases
 
@@ -99,14 +106,20 @@ Figures:
 - `results/figures/20_large_purchase_revenue_top10_by_week.png`
 - `results/figures/21_large_purchase_revenue_top10_by_weekday.png`
 - `results/figures/34_weekday_revenue_distribution_all_top20_top10.png`
+- `results/figures/44_large_purchase_black_friday_window.png`
+- `results/figures/45_large_purchase_category_mix_peak_vs_normal.png`
+- `results/figures/46_large_purchase_installments_by_month.png`
 
 ## Slide 10 — Can seasonality be predicted?
 
-Use category-level feature table. Model result: ROC-AUC 0.33, F1 0.00. Interpret feature importance cautiously due to short history and small number of categories.
+Use two tests: full-period category features and stricter H1→H2 early-signal prediction. Full-period model: ROC-AUC 0.33, F1 0.00. Early-signal model: ROC-AUC 0.70, F1 0.40. Interpret both cautiously due to short history and small number of categories.
 
 Figures:
 - `results/figures/12_seasonality_prediction_roc.png` if generated.
 - `results/figures/13_seasonality_feature_importance.png`
+- `results/figures/41_early_prediction_roc.png`
+- `results/figures/42_early_prediction_feature_importance.png`
+- `results/figures/43_early_warning_score_vs_final_seasonality.png`
 
 ## Slide 11 — Forecasting implication
 

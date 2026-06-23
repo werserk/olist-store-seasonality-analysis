@@ -40,6 +40,12 @@ def write_notes_and_outline(
     auc_text = "not enough data"
     if not pred_results.empty and pd.notna(pred_results.loc[0, "roc_auc"]):
         auc_text = f"ROC-AUC {pred_results.loc[0, 'roc_auc']:.2f}, F1 {pred_results.loc[0, 'f1']:.2f}"
+    early_text = "not enough data"
+    early_results_path = TABLES / "early_seasonality_prediction_results.csv"
+    if early_results_path.exists():
+        early_results = pd.read_csv(early_results_path)
+        if not early_results.empty and pd.notna(early_results.loc[0, "roc_auc"]):
+            early_text = f"ROC-AUC {early_results.loc[0, 'roc_auc']:.2f}, F1 {early_results.loc[0, 'f1']:.2f}"
 
     limitations = f"""# Limitations
 
@@ -131,7 +137,10 @@ Top high/medium-confidence seasonal categories:
 
 {table_to_markdown(top_seasonal[["category", "total_orders", "seasonality_score", "peak_month", "peak_quarter", "seasonality_type", "confidence_level"]], 10)}
 
-Figure: `results/figures/05_top_seasonal_categories.png`.
+Figures:
+- `results/figures/35_top_seasonal_categories_with_peak_month.png`
+- `results/figures/36_top6_category_monthly_profiles.png`
+- `results/figures/05_top_seasonal_categories.png` as appendix.
 
 ## Slide 6 — Seasonality types
 
@@ -140,6 +149,7 @@ Show category × month heatmap and cluster heatmap. Explain that we identify mul
 Figures:
 - `results/figures/06_category_month_seasonal_index_heatmap.png`
 - `results/figures/07_seasonality_type_clusters.png`
+- `results/figures/37_seasonality_type_composition.png`
 
 ## Slide 7 — Event-driven and weekly patterns
 
@@ -155,7 +165,10 @@ Compare peak vs normal months for seasonal categories.
 
 {table_to_markdown(impact[["metric", "normal_months", "peak_months", "delta_pct"]].round(3), 12)}
 
-Figure: `results/figures/10_peak_vs_normal_business_metrics.png`.
+Figures:
+- `results/figures/10_peak_vs_normal_business_metrics.png`
+- `results/figures/39_business_impact_by_category_uplift.png`
+- `results/figures/40_revenue_decomposition_peak_vs_normal.png`
 
 ## Slide 9 — Large purchases
 
@@ -169,14 +182,20 @@ Figures:
 - `results/figures/20_large_purchase_revenue_top10_by_week.png`
 - `results/figures/21_large_purchase_revenue_top10_by_weekday.png`
 - `results/figures/34_weekday_revenue_distribution_all_top20_top10.png`
+- `results/figures/44_large_purchase_black_friday_window.png`
+- `results/figures/45_large_purchase_category_mix_peak_vs_normal.png`
+- `results/figures/46_large_purchase_installments_by_month.png`
 
 ## Slide 10 — Can seasonality be predicted?
 
-Use category-level feature table. Model result: {auc_text}. Interpret feature importance cautiously due to short history and small number of categories.
+Use two tests: full-period category features and stricter H1→H2 early-signal prediction. Full-period model: {auc_text}. Early-signal model: {early_text}. Interpret both cautiously due to short history and small number of categories.
 
 Figures:
 - `results/figures/12_seasonality_prediction_roc.png` if generated.
 - `results/figures/13_seasonality_feature_importance.png`
+- `results/figures/41_early_prediction_roc.png`
+- `results/figures/42_early_prediction_feature_importance.png`
+- `results/figures/43_early_warning_score_vs_final_seasonality.png`
 
 ## Slide 11 — Forecasting implication
 
@@ -208,7 +227,7 @@ Seasonality is heterogeneous. The strongest high/medium-confidence categories by
 
 {table_to_markdown(top_seasonal[["category", "total_orders", "seasonality_score", "peak_month", "peak_quarter", "seasonality_type"]], 10)}
 
-Product-level appendix is available in `results/tables/product_seasonality_ranking.csv`; product IDs should be interpreted through their category because Olist has no readable product names.
+Product-level appendix is available in `results/tables/product_seasonality_ranking.csv` and `results/figures/38_top20_seasonal_products_appendix.png`; product IDs should be interpreted through their category because Olist has no readable product names. The presentation-first category visuals are `35_top_seasonal_categories_with_peak_month.png` and `36_top6_category_monthly_profiles.png`.
 
 ### What types of seasonality appear?
 
@@ -216,17 +235,17 @@ The project distinguishes monthly/calendar, quarterly, event-driven, weekly, tre
 
 ### Business impact
 
-Peak months for seasonal categories are compared to normal months in `results/tables/business_impact_peak_vs_normal.csv`. The comparison covers orders, revenue, average order value, large purchases, installments, freight, delivery time and review score.
+Peak months for seasonal categories are compared to normal months in `results/tables/business_impact_peak_vs_normal.csv`. Paired category uplift is in `results/tables/business_impact_by_category_uplift.csv`, and revenue decomposition is in `results/tables/business_revenue_decomposition_peak_vs_normal.csv`. The comparison covers orders, revenue, average order value, large purchases, installments, freight, delivery time and review score.
 
 ### Large purchases
 
-Large purchases are defined as item-level `price >= P90`, i.e. top-10% most expensive goods. Sensitivity thresholds for top-5%, top-15% and top-20% are in `results/tables/large_purchase_price_thresholds.csv`. Revenue distributions by month/quarter/week/weekday are in `results/tables/large_purchase_revenue_by_*.csv`. Highest top-10% revenue-distribution months:
+Large purchases are defined as item-level `price >= P90`, i.e. top-10% most expensive goods. Sensitivity thresholds for top-5%, top-15% and top-20% are in `results/tables/large_purchase_price_thresholds.csv`. Revenue distributions by month/quarter/week/weekday are in `results/tables/large_purchase_revenue_by_*.csv`; Black Friday/Q4 window, category mix, and installments are in `large_purchase_black_friday_window.csv`, `large_purchase_category_mix_peak_vs_normal.csv`, and `large_purchase_installments_by_month.csv`. Highest top-10% revenue-distribution months:
 
 {table_to_markdown(top_large[["month", "large_revenue_top10", "large_revenue_distribution_top10", "large_revenue_share_of_period_top10"]].round(3), 5)}
 
 ### Can seasonality be predicted?
 
-A category-level feature model was trained with target `is_seasonal = top quartile by seasonality score`. Result: {auc_text}. Feature importances are in `results/tables/model_feature_importance.csv` and figure `results/figures/13_seasonality_feature_importance.png`.
+A category-level feature model was trained with target `is_seasonal = top quartile by seasonality score`. Result: {auc_text}. A stricter early-signal model uses only Jan–Jun features to predict Jul–Dec seasonality: {early_text}. Feature importances are in `results/tables/model_feature_importance.csv` and `results/tables/early_seasonality_feature_importance.csv`.
 
 ### How to forecast demand?
 
@@ -264,13 +283,17 @@ make final-analysis
 - `results/tables/category_seasonality_ranking.csv` — рейтинг сезонности категорий с типом сезонности и confidence.
 - `results/tables/product_seasonality_ranking.csv` — appendix по сезонным `product_id`.
 - `results/tables/business_impact_peak_vs_normal.csv` — влияние peak months на бизнес-метрики.
+- `results/tables/business_impact_by_category_uplift.csv` и `business_revenue_decomposition_peak_vs_normal.csv` — paired uplift и decomposition бизнес-эффекта.
 - `results/tables/large_purchase_price_thresholds.csv` — пороги top-5/10/15/20% по цене товара.
 - `results/tables/large_purchase_revenue_by_month.csv` — распределение выручки крупных покупок по месяцам.
 - `results/tables/large_purchase_revenue_by_quarter.csv`, `large_purchase_revenue_by_week.csv`, `large_purchase_revenue_by_weekday.csv` — другие гранулярности.
+- `results/tables/large_purchase_black_friday_window.csv`, `large_purchase_category_mix_peak_vs_normal.csv`, `large_purchase_installments_by_month.csv` — event window, category mix и рассрочка для крупных покупок.
 - `results/tables/model_feature_importance.csv` — признаки, связанные с сезонностью.
+- `results/tables/early_seasonality_prediction_results.csv`, `early_seasonality_feature_importance.csv`, `early_warning_scorecard.csv` — проверка ранних Jan–Jun сигналов.
 - `results/tables/top3_categories_by_month.csv` и `top5_products_by_month.csv` — топы по каждому месяцу.
 - `results/tables/top3_categories_by_quarter.csv` и `top5_products_by_quarter.csv` — топы по каждому кварталу.
 - `results/figures/` — пронумерованные финальные графики для презентации (`01_...png`, `02_...png`, ...).
+- `results/final_figure_set/` — очищенный комплект ключевых графиков для презентации.
 - `results/presentation_outline.md` — структура 8-минутной презентации.
 - `results/final_summary.md` — прямые ответы на вопросы кейса.
 

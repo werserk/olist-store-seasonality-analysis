@@ -1,0 +1,12 @@
+seasonality_type,confidence_level,categories_count
+early_year,medium,1
+event_driven,high,22
+event_driven,medium,3
+holiday_q4,high,2
+low_confidence,low,34
+mid_year,medium,1
+single_month_spike,high,1
+stable,high,2
+trend_driven,medium,5
+weekly_pattern,high,1
+weekly_pattern,medium,1

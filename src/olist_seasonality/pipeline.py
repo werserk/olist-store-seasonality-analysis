@@ -5,6 +5,13 @@ import warnings
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from .completion import (
+    business_completion_figures,
+    early_prediction_completion_figures,
+    large_purchase_completion_figures,
+    refresh_final_figure_set,
+    seasonality_completion_figures,
+)
 from .data import audit_tables, build_enriched, coverage_analysis, load_tables
 from .config import FIGURES, RESULTS, TABLES
 from .metrics import aggregate_metrics
@@ -35,9 +42,13 @@ def main() -> None:
     ranking, cat_month = category_seasonality(enriched)
     granularity_artifacts(enriched, ranking)
     product_ranking = product_seasonality(enriched)
+    seasonality_completion_figures(ranking, cat_month, product_ranking)
     impact = business_impact(enriched, ranking, cat_month)
+    business_completion_figures(enriched, ranking, cat_month)
     large = large_purchases(enriched)
+    large_purchase_completion_figures(enriched, ranking, cat_month)
     prediction_features, pred_results = prediction_block(enriched, ranking)
+    early_prediction_completion_figures(enriched, ranking)
     forecast_results = forecast_block(enriched)
     robustness_analysis(ranking)
     write_notes_and_outline(
@@ -52,6 +63,7 @@ def main() -> None:
         forecast_results,
     )
     update_readme()
+    refresh_final_figure_set()
     import json
 
     print(json.dumps({

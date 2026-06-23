@@ -1,0 +1,2 @@
+model,roc_auc,f1,accuracy,n_train,n_test,target_threshold
+h1_to_h2_random_forest,0.7,0.4,0.7692307692307693,23,13,0.4000875559906637

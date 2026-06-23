@@ -2,6 +2,25 @@
 
 Цель документа — зафиксировать, какие визуализации нужны, чтобы работа была завершена по исходным исследовательским вопросам, какие из них уже построены, а какие ещё стоит добавить.
 
+## Execution status
+
+План выполнен: недостающие графики G01–G12 добавлены в pipeline, итоговый cleaned set пересобирается автоматически в `results/final_figure_set/` после `make final-analysis`.
+
+Новые графики:
+
+- G01: `results/figures/35_top_seasonal_categories_with_peak_month.png`
+- G02: `results/figures/36_top6_category_monthly_profiles.png`
+- G03: `results/figures/37_seasonality_type_composition.png`
+- G04: `results/figures/38_top20_seasonal_products_appendix.png`
+- G05: `results/figures/39_business_impact_by_category_uplift.png`
+- G06: `results/figures/40_revenue_decomposition_peak_vs_normal.png`
+- G07: `results/figures/41_early_prediction_roc.png`
+- G08: `results/figures/42_early_prediction_feature_importance.png`
+- G09: `results/figures/43_early_warning_score_vs_final_seasonality.png`
+- G10: `results/figures/44_large_purchase_black_friday_window.png`
+- G11: `results/figures/45_large_purchase_category_mix_peak_vs_normal.png`
+- G12: `results/figures/46_large_purchase_installments_by_month.png`
+
 ## Целевые вопросы
 
 1. **Основной вопрос:** как сезонность влияет на спрос и какие товары/категории подвержены ей сильнее всего?
@@ -308,9 +327,9 @@
 
 ## Acceptance checklist
 
-- [ ] Каждый целевой вопрос имеет минимум один главный график.
-- [ ] Каждый главный график имеет таблицу-источник в `results/tables/`.
-- [ ] Итоговая папка `results/final_figure_set/` содержит только презентационно важные графики.
-- [ ] Все новые графики имеют стабильную нумерацию и читаемые имена.
-- [ ] `results/final_summary.md` и `results/presentation_outline.md` ссылаются на актуальные графики.
-- [ ] `make final-analysis` проходит после всех изменений.
+- [x] Каждый целевой вопрос имеет минимум один главный график.
+- [x] Каждый главный график имеет таблицу-источник в `results/tables/`.
+- [x] Итоговая папка `results/final_figure_set/` содержит только презентационно важные графики.
+- [x] Все новые графики имеют стабильную нумерацию и читаемые имена.
+- [x] `results/final_summary.md` и `results/presentation_outline.md` ссылаются на актуальные графики.
+- [x] `make final-analysis` проходит после всех изменений.
