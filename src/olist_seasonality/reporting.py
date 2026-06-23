@@ -36,7 +36,7 @@ def write_notes_and_outline(
     if len(top_seasonal) < 5:
         top_seasonal = ranking[ranking["confidence_level"].ne("low")].head(10)
     top_stable = ranking[ranking["confidence_level"].ne("low")].sort_values("seasonality_score").head(10)
-    top_large = large[(large["orders_count"] >= 500) & (large["year"] != 2016)].sort_values("large_purchase_share_p90", ascending=False).head(5)
+    top_large = large.sort_values("large_revenue_distribution_top10", ascending=False).head(5)
     auc_text = "not enough data"
     if not pred_results.empty and pd.notna(pred_results.loc[0, "roc_auc"]):
         auc_text = f"ROC-AUC {pred_results.loc[0, 'roc_auc']:.2f}, F1 {pred_results.loc[0, 'f1']:.2f}"
@@ -83,6 +83,10 @@ Categories are assigned to rule-based types: `stable`, `single_month_spike`, `ho
 ## Business impact
 
 For high/medium-confidence seasonal categories, peak months are months where the category seasonal index is at least 1.25. Metrics are compared between peak and normal months.
+
+## Large purchases
+
+Large purchases are item-level expensive goods: a product item belongs to the selected top-price bucket by `price`. The main definition uses top-10% (`price >= P90`); sensitivity tables also cover top-5%, top-15% and top-20%.
 
 ## Prediction block
 
@@ -142,8 +146,8 @@ Figures:
 Use daily rolling z-score to find spikes and weekday chart for operational rhythm.
 
 Figures:
-- `results/figures/daily_spikes_overview.png`
-- `results/figures/weekday_orders.png`
+- `results/figures/08_daily_spikes_overview.png`
+- `results/figures/09_weekday_orders.png`
 
 ## Slide 8 — Business impact
 
@@ -155,11 +159,15 @@ Figure: `results/figures/10_peak_vs_normal_business_metrics.png`.
 
 ## Slide 9 — Large purchases
 
-Top months by P90 large-purchase share:
+Top months by top-10% expensive-goods revenue distribution:
 
-{table_to_markdown(top_large[["year_month", "orders_count", "large_purchase_share_p90", "avg_payment_value", "avg_payment_installments"]].round(3), 5)}
+{table_to_markdown(top_large[["month", "orders_count", "large_revenue_top10", "large_revenue_distribution_top10", "large_revenue_share_of_period_top10"]].round(3), 5)}
 
-Figure: `results/figures/11_large_purchase_share_by_month.png`.
+Figures:
+- `results/figures/11_large_purchase_revenue_by_month.png`
+- `results/figures/19_large_purchase_revenue_by_quarter.png`
+- `results/figures/20_large_purchase_revenue_by_week.png`
+- `results/figures/21_large_purchase_revenue_by_weekday.png`
 
 ## Slide 10 — Can seasonality be predicted?
 
@@ -211,9 +219,9 @@ Peak months for seasonal categories are compared to normal months in `results/ta
 
 ### Large purchases
 
-Large purchases are defined as order-level `payment_value >= P90`. Monthly results are in `results/tables/large_purchase_monthly.csv`. Highest-share months:
+Large purchases are defined as item-level `price >= P90`, i.e. top-10% most expensive goods. Sensitivity thresholds for top-5%, top-15% and top-20% are in `results/tables/large_purchase_price_thresholds.csv`. Revenue distributions by month/quarter/week/weekday are in `results/tables/large_purchase_revenue_by_*.csv`. Highest top-10% revenue-distribution months:
 
-{table_to_markdown(top_large[["year_month", "large_purchase_share_p90", "avg_payment_value", "share_installments_6_plus"]].round(3), 5)}
+{table_to_markdown(top_large[["month", "large_revenue_top10", "large_revenue_distribution_top10", "large_revenue_share_of_period_top10"]].round(3), 5)}
 
 ### Can seasonality be predicted?
 
@@ -255,8 +263,12 @@ make final-analysis
 - `results/tables/category_seasonality_ranking.csv` — рейтинг сезонности категорий с типом сезонности и confidence.
 - `results/tables/product_seasonality_ranking.csv` — appendix по сезонным `product_id`.
 - `results/tables/business_impact_peak_vs_normal.csv` — влияние peak months на бизнес-метрики.
-- `results/tables/large_purchase_monthly.csv` — месяцы крупных покупок.
+- `results/tables/large_purchase_price_thresholds.csv` — пороги top-5/10/15/20% по цене товара.
+- `results/tables/large_purchase_revenue_by_month.csv` — распределение выручки крупных покупок по месяцам.
+- `results/tables/large_purchase_revenue_by_quarter.csv`, `large_purchase_revenue_by_week.csv`, `large_purchase_revenue_by_weekday.csv` — другие гранулярности.
 - `results/tables/model_feature_importance.csv` — признаки, связанные с сезонностью.
+- `results/tables/top3_categories_by_month.csv` и `top5_products_by_month.csv` — топы по каждому месяцу.
+- `results/tables/top3_categories_by_quarter.csv` и `top5_products_by_quarter.csv` — топы по каждому кварталу.
 - `results/figures/` — пронумерованные финальные графики для презентации (`01_...png`, `02_...png`, ...).
 - `results/presentation_outline.md` — структура 8-минутной презентации.
 - `results/final_summary.md` — прямые ответы на вопросы кейса.

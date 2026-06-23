@@ -57,8 +57,8 @@ Figures:
 Use daily rolling z-score to find spikes and weekday chart for operational rhythm.
 
 Figures:
-- `results/figures/daily_spikes_overview.png`
-- `results/figures/weekday_orders.png`
+- `results/figures/08_daily_spikes_overview.png`
+- `results/figures/09_weekday_orders.png`
 
 ## Slide 8 — Business impact
 
@@ -83,17 +83,21 @@ Figure: `results/figures/10_peak_vs_normal_business_metrics.png`.
 
 ## Slide 9 — Large purchases
 
-Top months by P90 large-purchase share:
+Top months by top-10% expensive-goods revenue distribution:
 
-| year_month   |   orders_count |   large_purchase_share_p90 |   avg_payment_value |   avg_payment_installments |
-|:-------------|---------------:|---------------------------:|--------------------:|---------------------------:|
-| 2017-01      |            750 |                      0.14  |             170.061 |                      2.975 |
-| 2017-04      |           2303 |                      0.115 |             169.758 |                      3.173 |
-| 2017-10      |           4478 |                      0.113 |             167.74  |                      2.947 |
-| 2017-09      |           4150 |                      0.11  |             168.957 |                      3.076 |
-| 2017-03      |           2546 |                      0.108 |             162.753 |                      2.973 |
+|   month |   orders_count |   large_revenue_top10 |   large_revenue_distribution_top10 |   large_revenue_share_of_period_top10 |
+|--------:|---------------:|----------------------:|-----------------------------------:|--------------------------------------:|
+|      11 |           7289 |                400022 |                              0.163 |                                 0.405 |
+|      10 |           4478 |                283748 |                              0.115 |                                 0.438 |
+|      12 |           5513 |                273117 |                              0.111 |                                 0.376 |
+|       9 |           4150 |                266430 |                              0.108 |                                 0.439 |
+|       8 |           4193 |                216224 |                              0.088 |                                 0.39  |
 
-Figure: `results/figures/11_large_purchase_share_by_month.png`.
+Figures:
+- `results/figures/11_large_purchase_revenue_by_month.png`
+- `results/figures/19_large_purchase_revenue_by_quarter.png`
+- `results/figures/20_large_purchase_revenue_by_week.png`
+- `results/figures/21_large_purchase_revenue_by_weekday.png`
 
 ## Slide 10 — Can seasonality be predicted?
 

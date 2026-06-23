@@ -31,15 +31,15 @@ Peak months for seasonal categories are compared to normal months in `results/ta
 
 ### Large purchases
 
-Large purchases are defined as order-level `payment_value >= P90`. Monthly results are in `results/tables/large_purchase_monthly.csv`. Highest-share months:
+Large purchases are defined as item-level `price >= P90`, i.e. top-10% most expensive goods. Sensitivity thresholds for top-5%, top-15% and top-20% are in `results/tables/large_purchase_price_thresholds.csv`. Revenue distributions by month/quarter/week/weekday are in `results/tables/large_purchase_revenue_by_*.csv`. Highest top-10% revenue-distribution months:
 
-| year_month   |   large_purchase_share_p90 |   avg_payment_value |   share_installments_6_plus |
-|:-------------|---------------------------:|--------------------:|----------------------------:|
-| 2017-01      |                      0.14  |             170.061 |                       0.183 |
-| 2017-04      |                      0.115 |             169.758 |                       0.193 |
-| 2017-10      |                      0.113 |             167.74  |                       0.163 |
-| 2017-09      |                      0.11  |             168.957 |                       0.178 |
-| 2017-03      |                      0.108 |             162.753 |                       0.176 |
+|   month |   large_revenue_top10 |   large_revenue_distribution_top10 |   large_revenue_share_of_period_top10 |
+|--------:|----------------------:|-----------------------------------:|--------------------------------------:|
+|      11 |                400022 |                              0.163 |                                 0.405 |
+|      10 |                283748 |                              0.115 |                                 0.438 |
+|      12 |                273117 |                              0.111 |                                 0.376 |
+|       9 |                266430 |                              0.108 |                                 0.439 |
+|       8 |                216224 |                              0.088 |                                 0.39  |
 
 ### Can seasonality be predicted?
 

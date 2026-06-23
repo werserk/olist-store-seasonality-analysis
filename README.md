@@ -104,8 +104,12 @@ make final-analysis
 - `results/tables/category_seasonality_ranking.csv` — рейтинг сезонности категорий с типом сезонности и confidence.
 - `results/tables/product_seasonality_ranking.csv` — appendix по сезонным `product_id`.
 - `results/tables/business_impact_peak_vs_normal.csv` — влияние peak months на бизнес-метрики.
-- `results/tables/large_purchase_monthly.csv` — месяцы крупных покупок.
+- `results/tables/large_purchase_price_thresholds.csv` — пороги top-5/10/15/20% по цене товара.
+- `results/tables/large_purchase_revenue_by_month.csv` — распределение выручки крупных покупок по месяцам.
+- `results/tables/large_purchase_revenue_by_quarter.csv`, `large_purchase_revenue_by_week.csv`, `large_purchase_revenue_by_weekday.csv` — другие гранулярности.
 - `results/tables/model_feature_importance.csv` — признаки, связанные с сезонностью.
+- `results/tables/top3_categories_by_month.csv` и `top5_products_by_month.csv` — топы по каждому месяцу.
+- `results/tables/top3_categories_by_quarter.csv` и `top5_products_by_quarter.csv` — топы по каждому кварталу.
 - `results/figures/` — пронумерованные финальные графики для презентации (`01_...png`, `02_...png`, ...).
 - `results/presentation_outline.md` — структура 8-минутной презентации.
 - `results/final_summary.md` — прямые ответы на вопросы кейса.

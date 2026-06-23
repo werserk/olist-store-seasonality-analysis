@@ -13,6 +13,7 @@ from .reporting import update_readme, write_notes_and_outline
 from .seasonality import (
     business_impact,
     category_seasonality,
+    granularity_artifacts,
     large_purchases,
     product_seasonality,
     robustness_analysis,
@@ -32,6 +33,7 @@ def main() -> None:
     coverage = coverage_analysis(tables)
     monthly, weekly = aggregate_metrics(enriched)
     ranking, cat_month = category_seasonality(enriched)
+    granularity_artifacts(enriched, ranking)
     product_ranking = product_seasonality(enriched)
     impact = business_impact(enriched, ranking, cat_month)
     large = large_purchases(enriched)

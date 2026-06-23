@@ -248,6 +248,136 @@ def category_seasonality(enriched: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataF
     return ranking, cat_month
 
 
+def _top_n_by_period(
+    data: pd.DataFrame,
+    period_cols: list[str],
+    entity_cols: list[str],
+    n: int,
+) -> pd.DataFrame:
+    grouped = (
+        data.groupby(period_cols + entity_cols, dropna=False)
+        .agg(
+            orders_count=("order_id", "nunique"),
+            items_sold=("order_item_id", "count"),
+            revenue=("price", "sum"),
+        )
+        .reset_index()
+        .sort_values(
+            period_cols + ["orders_count", "revenue", "items_sold"],
+            ascending=[True] * len(period_cols) + [False, False, False],
+        )
+    )
+    grouped["rank"] = grouped.groupby(period_cols).cumcount() + 1
+    return grouped[grouped["rank"].le(n)].copy()
+
+
+def granularity_artifacts(enriched: pd.DataFrame, ranking: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    """Create line-chart and top-N artifacts across requested granularities."""
+    delivered_2017 = enriched[(enriched["is_delivered"]) & (enriched["year"].eq(2017))].copy()
+    delivered_2017["category"] = delivered_2017["product_category_name_english"].fillna("unknown")
+
+    line_categories = (
+        ranking[ranking["confidence_level"].ne("low")]
+        .sort_values("seasonality_score", ascending=False)
+        .head(8)["category"]
+        .tolist()
+    )
+    line_data = delivered_2017[delivered_2017["category"].isin(line_categories)].copy()
+
+    category_quarterly = (
+        line_data.groupby(["category", "quarter"])
+        .agg(orders_count=("order_id", "nunique"), items_sold=("order_item_id", "count"), revenue=("price", "sum"))
+        .reset_index()
+    )
+    category_quarterly.to_csv(TABLES / "category_quarterly_line_metrics.csv", index=False)
+
+    category_monthly = (
+        line_data.groupby(["category", "month"])
+        .agg(orders_count=("order_id", "nunique"), items_sold=("order_item_id", "count"), revenue=("price", "sum"))
+        .reset_index()
+    )
+    category_monthly["month_name"] = category_monthly["month"].map(MONTH_NAMES)
+    category_monthly.to_csv(TABLES / "category_monthly_line_metrics.csv", index=False)
+
+    category_weekly = (
+        line_data.groupby(["category", "week"])
+        .agg(orders_count=("order_id", "nunique"), items_sold=("order_item_id", "count"), revenue=("price", "sum"))
+        .reset_index()
+        .sort_values(["week", "category"])
+    )
+    category_weekly["week_start"] = pd.PeriodIndex(category_weekly["week"], freq="W").start_time
+    category_weekly.to_csv(TABLES / "category_weekly_line_metrics.csv", index=False)
+
+    category_weekday = (
+        line_data.groupby(["category", "weekday"])
+        .agg(orders_count=("order_id", "nunique"), items_sold=("order_item_id", "count"), revenue=("price", "sum"))
+        .reset_index()
+    )
+    category_weekday["weekday_name"] = category_weekday["weekday"].map(WEEKDAY_NAMES)
+    category_weekday.to_csv(TABLES / "category_weekday_line_metrics.csv", index=False)
+
+    fig, ax = plt.subplots(figsize=(11, 5.2))
+    sns.lineplot(data=category_quarterly, x="quarter", y="orders_count", hue="category", marker="o", ax=ax)
+    ax.set_title("Seasonal categories by quarter: delivered orders, 2017")
+    ax.set_xlabel("Quarter")
+    ax.set_ylabel("Orders")
+    ax.set_xticks([1, 2, 3, 4])
+    ax.legend(title="Category", fontsize=7, title_fontsize=8, bbox_to_anchor=(1.02, 1), loc="upper left")
+    save_fig(FIGURES / "15_category_quarterly_line_orders.png")
+
+    fig, ax = plt.subplots(figsize=(12, 5.4))
+    sns.lineplot(data=category_monthly, x="month", y="orders_count", hue="category", marker="o", ax=ax)
+    ax.set_title("Seasonal categories by month: delivered orders, 2017")
+    ax.set_xlabel("Month")
+    ax.set_ylabel("Orders")
+    ax.set_xticks(list(range(1, 13)))
+    ax.legend(title="Category", fontsize=7, title_fontsize=8, bbox_to_anchor=(1.02, 1), loc="upper left")
+    save_fig(FIGURES / "16_category_monthly_line_orders.png")
+
+    fig, ax = plt.subplots(figsize=(13, 5.4))
+    sns.lineplot(data=category_weekly, x="week_start", y="orders_count", hue="category", ax=ax)
+    ax.set_title("Seasonal categories by week: delivered orders, 2017")
+    ax.set_xlabel("Week")
+    ax.set_ylabel("Orders")
+    ax.legend(title="Category", fontsize=7, title_fontsize=8, bbox_to_anchor=(1.02, 1), loc="upper left")
+    save_fig(FIGURES / "17_category_weekly_line_orders.png")
+
+    fig, ax = plt.subplots(figsize=(11, 5.2))
+    sns.lineplot(data=category_weekday, x="weekday", y="orders_count", hue="category", marker="o", ax=ax)
+    ax.set_title("Seasonal categories by weekday: delivered orders, 2017")
+    ax.set_xlabel("Weekday")
+    ax.set_ylabel("Orders")
+    ax.set_xticks(list(WEEKDAY_NAMES.keys()))
+    ax.set_xticklabels([WEEKDAY_NAMES[i] for i in WEEKDAY_NAMES])
+    ax.legend(title="Category", fontsize=7, title_fontsize=8, bbox_to_anchor=(1.02, 1), loc="upper left")
+    save_fig(FIGURES / "18_category_weekday_line_orders.png")
+
+    top_categories_by_month = _top_n_by_period(delivered_2017, ["month"], ["category"], 3)
+    top_categories_by_month["month_name"] = top_categories_by_month["month"].map(MONTH_NAMES)
+    top_categories_by_month.to_csv(TABLES / "top3_categories_by_month.csv", index=False)
+
+    top_products_by_month = _top_n_by_period(delivered_2017, ["month"], ["product_id", "category"], 5)
+    top_products_by_month["month_name"] = top_products_by_month["month"].map(MONTH_NAMES)
+    top_products_by_month.to_csv(TABLES / "top5_products_by_month.csv", index=False)
+
+    top_categories_by_quarter = _top_n_by_period(delivered_2017, ["quarter"], ["category"], 3)
+    top_categories_by_quarter.to_csv(TABLES / "top3_categories_by_quarter.csv", index=False)
+
+    top_products_by_quarter = _top_n_by_period(delivered_2017, ["quarter"], ["product_id", "category"], 5)
+    top_products_by_quarter.to_csv(TABLES / "top5_products_by_quarter.csv", index=False)
+
+    return {
+        "category_quarterly": category_quarterly,
+        "category_monthly": category_monthly,
+        "category_weekly": category_weekly,
+        "category_weekday": category_weekday,
+        "top_categories_by_month": top_categories_by_month,
+        "top_products_by_month": top_products_by_month,
+        "top_categories_by_quarter": top_categories_by_quarter,
+        "top_products_by_quarter": top_products_by_quarter,
+    }
+
+
 def product_seasonality(enriched: pd.DataFrame) -> pd.DataFrame:
     delivered = enriched[(enriched["is_delivered"]) & (enriched["year"].eq(2017))].copy()
     prod_month = (
@@ -361,40 +491,133 @@ def business_impact(enriched: pd.DataFrame, ranking: pd.DataFrame, cat_month: pd
 
 
 def large_purchases(enriched: pd.DataFrame) -> pd.DataFrame:
-    orders = order_level(enriched)
-    p75, p90 = orders["payment_value"].quantile([0.75, 0.90])
-    orders["large_purchase_p75"] = orders["payment_value"].ge(p75)
-    orders["large_purchase_p90"] = orders["payment_value"].ge(p90)
-    monthly = (
-        orders.groupby(["year", "month", "year_month"])
-        .agg(
-            orders_count=("order_id", "nunique"),
-            large_purchase_count_p90=("large_purchase_p90", "sum"),
-            large_purchase_share_p90=("large_purchase_p90", "mean"),
-            large_purchase_share_p75=("large_purchase_p75", "mean"),
-            avg_payment_value=("payment_value", "mean"),
-            median_payment_value=("payment_value", "median"),
-            avg_payment_installments=("payment_installments", "mean"),
-            share_installments_6_plus=("payment_installments", lambda x: x.ge(6).mean()),
+    """Analyze item-level expensive goods and their revenue distribution."""
+    items = enriched[(enriched["is_delivered"]) & (enriched["year"].eq(2017))].copy()
+    thresholds = {
+        "top5": 0.95,
+        "top10": 0.90,
+        "top15": 0.85,
+        "top20": 0.80,
+    }
+    threshold_rows = []
+    for label, quantile in thresholds.items():
+        value = float(items["price"].quantile(quantile))
+        items[f"large_item_{label}"] = items["price"].ge(value)
+        items[f"large_revenue_{label}"] = np.where(items[f"large_item_{label}"], items["price"], 0.0)
+        threshold_rows.append(
+            {
+                "threshold": label,
+                "price_quantile": quantile,
+                "min_item_price": value,
+                "items_count": int(items[f"large_item_{label}"].sum()),
+                "items_share": float(items[f"large_item_{label}"].mean()),
+                "revenue": float(items[f"large_revenue_{label}"].sum()),
+                "revenue_share": float(items[f"large_revenue_{label}"].sum() / items["price"].sum()),
+            }
         )
-        .reset_index()
-    )
-    monthly.to_csv(PROCESSED / "large_purchase_monthly.csv", index=False)
+    threshold_table = pd.DataFrame(threshold_rows)
+    threshold_table.to_csv(TABLES / "large_purchase_price_thresholds.csv", index=False)
+
+    def aggregate(period_cols: list[str], name: str) -> pd.DataFrame:
+        grouped = (
+            items.groupby(period_cols, dropna=False)
+            .agg(
+                orders_count=("order_id", "nunique"),
+                items_count=("order_item_id", "count"),
+                total_revenue=("price", "sum"),
+                avg_item_price=("price", "mean"),
+                median_item_price=("price", "median"),
+            )
+            .reset_index()
+        )
+        for label in thresholds:
+            stats = (
+                items.groupby(period_cols, dropna=False)
+                .agg(
+                    **{
+                        f"large_items_count_{label}": (f"large_item_{label}", "sum"),
+                        f"large_revenue_{label}": (f"large_revenue_{label}", "sum"),
+                    }
+                )
+                .reset_index()
+            )
+            grouped = grouped.merge(stats, on=period_cols, how="left")
+            grouped[f"large_items_share_{label}"] = grouped[f"large_items_count_{label}"] / grouped["items_count"]
+            grouped[f"large_revenue_share_of_period_{label}"] = grouped[f"large_revenue_{label}"] / grouped["total_revenue"]
+            total_large_revenue = grouped[f"large_revenue_{label}"].sum()
+            grouped[f"large_revenue_distribution_{label}"] = grouped[f"large_revenue_{label}"] / total_large_revenue if total_large_revenue else np.nan
+        grouped.to_csv(PROCESSED / f"large_purchase_revenue_by_{name}.csv", index=False)
+        grouped.to_csv(TABLES / f"large_purchase_revenue_by_{name}.csv", index=False)
+        return grouped
+
+    monthly = aggregate(["month", "year_month"], "month")
+    quarterly = aggregate(["quarter"], "quarter")
+    weekly = aggregate(["week"], "week")
+    weekday = aggregate(["weekday", "weekday_name"], "weekday")
+
+    # Backward-compatible summary name used by the report.
     monthly.to_csv(TABLES / "large_purchase_monthly.csv", index=False)
 
-    fig, ax1 = plt.subplots(figsize=(12, 4.8))
-    sns.lineplot(data=monthly, x="year_month", y="large_purchase_share_p90", marker="o", ax=ax1, label="P90 large purchase share")
-    ax1.set_ylabel("Large purchase share")
-    ax1.tick_params(axis="x", rotation=65)
-    ax2 = ax1.twinx()
-    sns.lineplot(data=monthly, x="year_month", y="avg_payment_value", marker="s", ax=ax2, color="darkorange", label="Avg payment value")
-    ax2.set_ylabel("Avg payment value, BRL")
-    ax1.set_title("Large purchases and average payment value by month")
-    lines, labels = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax1.legend(lines + lines2, labels + labels2, loc="upper left")
-    ax2.legend_.remove() if ax2.legend_ else None
-    save_fig(FIGURES / "11_large_purchase_share_by_month.png")
+    figure_numbers = {
+        "top10": {"month": 11, "quarter": 19, "week": 20, "weekday": 21},
+        "top5": {"month": 22, "quarter": 23, "week": 24, "weekday": 25},
+        "top15": {"month": 26, "quarter": 27, "week": 28, "weekday": 29},
+        "top20": {"month": 30, "quarter": 31, "week": 32, "weekday": 33},
+    }
+    threshold_titles = {"top5": "top-5%", "top10": "top-10%", "top15": "top-15%", "top20": "top-20%"}
+
+    def save_monthly_revenue_plot(label: str) -> None:
+        title = threshold_titles[label]
+        fig, ax1 = plt.subplots(figsize=(12, 4.8))
+        sns.lineplot(
+            data=monthly,
+            x="month",
+            y=f"large_revenue_distribution_{label}",
+            marker="o",
+            ax=ax1,
+            label=f"{title} revenue distribution",
+        )
+        ax1.set_ylabel(f"Share of {title} item revenue")
+        ax1.set_xlabel("Month")
+        ax1.set_xticks(list(range(1, 13)))
+        ax2 = ax1.twinx()
+        sns.lineplot(
+            data=monthly,
+            x="month",
+            y=f"large_revenue_share_of_period_{label}",
+            marker="s",
+            ax=ax2,
+            color="darkorange",
+            label=f"{title} share of month revenue",
+        )
+        ax2.set_ylabel("Share of month revenue")
+        ax1.set_title(f"Revenue from {title} expensive goods by month, 2017")
+        lines, labels = ax1.get_legend_handles_labels()
+        lines2, labels2 = ax2.get_legend_handles_labels()
+        ax1.legend(lines + lines2, labels + labels2, loc="upper left")
+        ax2.legend_.remove() if ax2.legend_ else None
+        save_fig(FIGURES / f"{figure_numbers[label]['month']:02d}_large_purchase_revenue_{label}_by_month.png")
+
+    def save_distribution_plot(df: pd.DataFrame, label: str, x_col: str, grain: str) -> None:
+        title = threshold_titles[label]
+        fig, ax = plt.subplots(figsize=(11, 4.8))
+        sns.lineplot(data=df, x=x_col, y=f"large_revenue_distribution_{label}", marker="o", ax=ax)
+        ax.set_title(f"Distribution of {title} expensive-goods revenue by {grain}, 2017")
+        ax.set_xlabel(grain.title())
+        ax.set_ylabel(f"Share of {title} item revenue")
+        if x_col == "weekday":
+            ax.set_xticks(list(WEEKDAY_NAMES.keys()))
+            ax.set_xticklabels([WEEKDAY_NAMES[i] for i in WEEKDAY_NAMES])
+        save_fig(FIGURES / f"{figure_numbers[label][grain]:02d}_large_purchase_revenue_{label}_by_{grain}.png")
+
+    weekly_plot = weekly.assign(week_start=pd.PeriodIndex(weekly["week"], freq="W").start_time)
+    weekday_plot = weekday.sort_values("weekday")
+    for label in thresholds:
+        save_monthly_revenue_plot(label)
+        save_distribution_plot(quarterly, label, "quarter", "quarter")
+        save_distribution_plot(weekly_plot, label, "week_start", "week")
+        save_distribution_plot(weekday_plot, label, "weekday", "weekday")
+
     return monthly
 
 
