@@ -618,6 +618,36 @@ def large_purchases(enriched: pd.DataFrame) -> pd.DataFrame:
         save_distribution_plot(weekly_plot, label, "week_start", "week")
         save_distribution_plot(weekday_plot, label, "weekday", "weekday")
 
+    weekday_compare = weekday_plot.assign(all_revenue_distribution=weekday_plot["total_revenue"] / weekday_plot["total_revenue"].sum())[
+        ["weekday", "weekday_name", "all_revenue_distribution", "large_revenue_distribution_top20", "large_revenue_distribution_top10"]
+    ].melt(
+        id_vars=["weekday", "weekday_name"],
+        var_name="segment",
+        value_name="revenue_distribution",
+    )
+    segment_names = {
+        "all_revenue_distribution": "All purchases",
+        "large_revenue_distribution_top20": "Top-20% expensive goods",
+        "large_revenue_distribution_top10": "Top-10% expensive goods",
+    }
+    weekday_compare["segment"] = weekday_compare["segment"].map(segment_names)
+    fig, ax = plt.subplots(figsize=(11, 4.8))
+    sns.lineplot(
+        data=weekday_compare,
+        x="weekday",
+        y="revenue_distribution",
+        hue="segment",
+        marker="o",
+        ax=ax,
+    )
+    ax.set_title("Revenue distribution by weekday: all purchases vs expensive goods, 2017")
+    ax.set_xlabel("Weekday")
+    ax.set_ylabel("Share of segment revenue")
+    ax.set_xticks(list(WEEKDAY_NAMES.keys()))
+    ax.set_xticklabels([WEEKDAY_NAMES[i] for i in WEEKDAY_NAMES])
+    ax.legend(title="Segment")
+    save_fig(FIGURES / "34_weekday_revenue_distribution_all_top20_top10.png")
+
     return monthly
 
 

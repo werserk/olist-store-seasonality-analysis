@@ -164,10 +164,11 @@ Top months by top-10% expensive-goods revenue distribution:
 {table_to_markdown(top_large[["month", "orders_count", "large_revenue_top10", "large_revenue_distribution_top10", "large_revenue_share_of_period_top10"]].round(3), 5)}
 
 Figures:
-- `results/figures/11_large_purchase_revenue_by_month.png`
-- `results/figures/19_large_purchase_revenue_by_quarter.png`
-- `results/figures/20_large_purchase_revenue_by_week.png`
-- `results/figures/21_large_purchase_revenue_by_weekday.png`
+- `results/figures/11_large_purchase_revenue_top10_by_month.png`
+- `results/figures/19_large_purchase_revenue_top10_by_quarter.png`
+- `results/figures/20_large_purchase_revenue_top10_by_week.png`
+- `results/figures/21_large_purchase_revenue_top10_by_weekday.png`
+- `results/figures/34_weekday_revenue_distribution_all_top20_top10.png`
 
 ## Slide 10 — Can seasonality be predicted?
 
