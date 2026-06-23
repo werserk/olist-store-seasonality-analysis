@@ -1,0 +1,17 @@
+{
+  "datasets": [
+    {
+      "id": "olist-brazilian-ecommerce",
+      "title": "Brazilian E-Commerce Public Dataset by Olist",
+      "source": "kaggle",
+      "kind": "ecommerce_orders",
+      "slug": "olistbr/brazilian-ecommerce",
+      "url": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data",
+      "role": "primary",
+      "merge_key": "order_id",
+      "raw_archive_dir": "data/raw/archives/olist-brazilian-ecommerce/",
+      "raw_extract_dir": "data/raw/olist-brazilian-ecommerce/",
+      "description": "Единственный датасет проекта: заказы, товары, категории, продавцы, клиенты, платежи и отзывы Olist за 2016–2018 гг."
+    }
+  ]
+}

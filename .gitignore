@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data artifacts: keep directory docs, not large datasets
+/data/raw/**
+!/data/raw/
+!/data/raw/README.md
+!/data/raw/archives/
+!/data/raw/archives/.gitkeep
+/data/processed/*
+!/data/processed/README.md
+
+# Generated outputs
+/results/*
+!/results/README.md
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
