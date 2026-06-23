@@ -1,0 +1,1 @@
+"""Olist seasonality analysis package."""

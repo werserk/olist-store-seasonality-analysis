@@ -79,7 +79,7 @@ Compare peak vs normal months for seasonal categories.
 | avg_review_score             |           4.13  |         4.064 |      -0.016 |
 | share_low_reviews            |           0.136 |         0.14  |       0.033 |
 
-Figure: `results/figures/08_peak_vs_normal_business_metrics.png`.
+Figure: `results/figures/10_peak_vs_normal_business_metrics.png`.
 
 ## Slide 9 — Large purchases
 
@@ -93,15 +93,15 @@ Top months by P90 large-purchase share:
 | 2017-09      |           4150 |                      0.11  |             168.957 |                      3.076 |
 | 2017-03      |           2546 |                      0.108 |             162.753 |                      2.973 |
 
-Figure: `results/figures/09_large_purchase_share_by_month.png`.
+Figure: `results/figures/11_large_purchase_share_by_month.png`.
 
 ## Slide 10 — Can seasonality be predicted?
 
 Use category-level feature table. Model result: ROC-AUC 0.33, F1 0.00. Interpret feature importance cautiously due to short history and small number of categories.
 
 Figures:
-- `results/figures/10_seasonality_feature_importance.png`
-- `results/figures/seasonality_prediction_roc.png` if generated.
+- `results/figures/12_seasonality_prediction_roc.png` if generated.
+- `results/figures/13_seasonality_feature_importance.png`
 
 ## Slide 11 — Forecasting implication
 
@@ -111,7 +111,7 @@ Forecast should be category-specific:
 - seasonal categories: use category-level seasonal profiles;
 - spike-driven categories: use event calendar + anomaly-aware planning.
 
-Figure: `results/figures/optional_forecast_examples.png`.
+Figure: `results/figures/14_optional_forecast_examples.png`.
 
 ## Slide 12 — Final recommendations
 

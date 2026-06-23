@@ -43,8 +43,8 @@ Large purchases are defined as order-level `payment_value >= P90`. Monthly resul
 
 ### Can seasonality be predicted?
 
-A category-level feature model was trained with target `is_seasonal = top quartile by seasonality score`. Result: ROC-AUC 0.33, F1 0.00. Feature importances are in `results/tables/model_feature_importance.csv` and figure `results/figures/10_seasonality_feature_importance.png`.
+A category-level feature model was trained with target `is_seasonal = top quartile by seasonality score`. Result: ROC-AUC 0.33, F1 0.00. Feature importances are in `results/tables/model_feature_importance.csv` and figure `results/figures/13_seasonality_feature_importance.png`.
 
 ### How to forecast demand?
 
-Use category-specific planning: stable categories can use simple baselines; seasonal categories need seasonal profiles; spike-driven categories need event calendars and anomaly-aware planning. A demonstration is saved in `results/figures/optional_forecast_examples.png` and `results/tables/forecast_model_comparison.csv`.
+Use category-specific planning: stable categories can use simple baselines; seasonal categories need seasonal profiles; spike-driven categories need event calendars and anomaly-aware planning. A demonstration is saved in `results/figures/14_optional_forecast_examples.png` and `results/tables/forecast_model_comparison.csv`.
