@@ -20,6 +20,11 @@ venv/
 # Generated outputs
 /results/*
 !/results/README.md
+!/results/*.md
+!/results/figures/
+!/results/figures/*.png
+!/results/tables/
+!/results/tables/*.csv
 
 # OS/editor
 .DS_Store

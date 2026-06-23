@@ -1,0 +1,4 @@
+setting,n_categories,top10_categories
+min_orders_50,45,computers; construction_tools_construction; costruction_tools_garden; drinks; electronics; food_drink; home_appliances; home_construction; kitchen_dining_laundry_garden_furniture; stationery
+min_orders_100,39,audio; computers; construction_tools_construction; electronics; food_drink; home_appliances; home_construction; kitchen_dining_laundry_garden_furniture; stationery; watches_gifts
+min_orders_200,28,books_general_interest; consoles_games; electronics; garden_tools; home_appliances; home_confort; musical_instruments; stationery; toys; watches_gifts
