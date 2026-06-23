@@ -25,6 +25,9 @@ venv/
 !/results/figures/*.png
 !/results/figures/pres/
 !/results/figures/pres/*.png
+!/results/final_figure_set/
+!/results/final_figure_set/*.png
+!/results/final_figure_set/README.md
 !/results/tables/
 !/results/tables/*.csv
 
