@@ -23,8 +23,16 @@ venv/
 !/results/*.md
 !/results/figures/
 !/results/figures/*.png
+!/results/figures/pres/
+!/results/figures/pres/*.png
 !/results/tables/
 !/results/tables/*.csv
+
+# Presentation artifacts (local only)
+results/speaker_notes.md
+results/presentation_olist_seasonality.pptx
+notes/presentation_script.md
+*.pptx
 
 # OS/editor
 .DS_Store
