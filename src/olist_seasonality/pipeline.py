@@ -25,10 +25,11 @@ from .seasonality import (
     product_seasonality,
     robustness_analysis,
 )
-from .utils import reset_presentation_outputs
+from .utils import reset_presentation_outputs, configure_plot_style
 
 warnings.filterwarnings("ignore")
 sns.set_theme(style="whitegrid")
+configure_plot_style()
 plt.rcParams.update({"figure.dpi": 140, "savefig.dpi": 180})
 
 

@@ -18,7 +18,7 @@ from sklearn.preprocessing import StandardScaler
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 from .config import FIGURES, MONTH_NAMES, NOTES, PROCESSED, RESULTS, TABLES, WEEKDAY_NAMES
-from .utils import mode_or_nan, safe_div, save_fig, table_to_markdown
+from .utils import mode_or_nan, safe_div, save_fig, style_heatmap_annotations, table_to_markdown
 
 def order_level(enriched: pd.DataFrame) -> pd.DataFrame:
     delivered = enriched[enriched["is_delivered"]].copy()
@@ -125,7 +125,8 @@ def aggregate_metrics(enriched: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFram
 
     heat = monthly.pivot(index="year", columns="month", values="orders_count").reindex(columns=range(1, 13))
     plt.figure(figsize=(11, 4.6))
-    sns.heatmap(heat, annot=True, fmt=".0f", cmap="YlGnBu", cbar_kws={"label": "Orders"})
+    ax = sns.heatmap(heat, annot=True, fmt=".0f", cmap="YlGnBu", cbar_kws={"label": "Orders"})
+    style_heatmap_annotations(ax, heat, cmap="YlGnBu")
     plt.title("Delivered orders heatmap: year × month")
     plt.xlabel("Month")
     plt.ylabel("Year")

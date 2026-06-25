@@ -18,7 +18,7 @@ from sklearn.preprocessing import StandardScaler
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 from .config import FIGURES, MONTH_NAMES, NOTES, PROCESSED, RESULTS, TABLES, WEEKDAY_NAMES
-from .utils import mode_or_nan, read_csv, save_fig, table_to_markdown
+from .utils import mode_or_nan, read_csv, save_fig, style_heatmap_annotations, table_to_markdown
 
 def load_tables() -> dict[str, pd.DataFrame]:
     date_cols = [
@@ -188,7 +188,8 @@ def coverage_analysis(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
     delivered["month"] = delivered["order_purchase_timestamp"].dt.month
     ym = delivered.groupby(["year", "month"])["order_id"].nunique().unstack(fill_value=0).reindex(columns=range(1, 13))
     plt.figure(figsize=(11, 4.6))
-    sns.heatmap(ym, annot=True, fmt=".0f", cmap="Blues", cbar_kws={"label": "Delivered orders"})
+    ax = sns.heatmap(ym, annot=True, fmt=".0f", cmap="Blues", cbar_kws={"label": "Delivered orders"})
+    style_heatmap_annotations(ax, ym, cmap="Blues")
     plt.title("Data coverage: delivered orders by year/month")
     plt.xlabel("Month")
     plt.ylabel("Year")

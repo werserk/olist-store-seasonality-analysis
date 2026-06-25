@@ -14,7 +14,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
 from .config import FIGURES, MONTH_NAMES, RESULTS, TABLES, WEEKDAY_NAMES
-from .utils import save_fig
+from .utils import save_fig, style_heatmap_annotations
 
 
 def _seasonal_category_sets(ranking: pd.DataFrame, cat_month: pd.DataFrame) -> tuple[pd.DataFrame, set[str], set[str]]:
@@ -44,11 +44,11 @@ def seasonality_completion_figures(
     for patch, peak_month in zip(ax.patches, top["peak_month"]):
         width = getattr(patch, "get_width")()
         y = getattr(patch, "get_y")() + getattr(patch, "get_height")() / 2
-        ax.text(width + 0.015, y, f"M{int(peak_month)}", va="center", fontsize=8)
+        ax.text(width + 0.015, y, f"M{int(peak_month)}", va="center", fontsize=8, color="#1e293b")
     ax.set_title("Most seasonal categories with peak month labels (2017)")
     ax.set_xlabel("Seasonality score: CV of monthly delivered orders")
     ax.set_ylabel("")
-    ax.legend(title="Type", fontsize=7, title_fontsize=8, loc="lower right")
+    ax.legend(title="Type", fontsize=7, title_fontsize=8, loc="upper left", bbox_to_anchor=(1.02, 1.0))
     save_fig(FIGURES / "35_top_seasonal_categories_with_peak_month.png")
 
     # G02: monthly profiles for top 6 categories.
