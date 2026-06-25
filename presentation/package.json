@@ -2,6 +2,7 @@
   "scripts": {
     "dev": "slidev slides.md --host 0.0.0.0",
     "build": "slidev build slides.md --out dist --base /",
+    "preview": "slidev build slides.md --out dist --base / && npx --yes serve dist -l 3030",
     "export:pdf": "slidev export slides.md --format pdf --output exports/olist-seasonality.pdf"
   },
   "dependencies": {

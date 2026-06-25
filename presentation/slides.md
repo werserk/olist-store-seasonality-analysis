@@ -62,20 +62,15 @@ layout: two-cols
 -->
 
 ---
-layout: image
-image: ./assets/figures/01_data_coverage_main_year.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 02 · Покрытие данных по годам
 
-## Почему базовый год — 2017
-
-- 2017 покрывает все месяцы.
-- 2016 начинается слишком поздно для сезонных выводов.
-- 2018 заканчивается до Q4, поэтому теряет ключевой сезон.
-
-<div class="callout">Вывод: календарные профили строим по 2017, остальные годы используем как контекст.</div>
+<div class="chart-frame">
+<img src="./assets/figures/01_data_coverage_main_year.png" alt="Покрытие данных по годам" />
+</div>
 
 <!--
 График показывает, почему нельзя просто взять весь период 2016–2018 и считать среднюю сезонность. У нас разные уровни покрытия по годам. Если смешать годы без фильтра, Q4 будет искажен: 2018 не дает полный конец года, а 2016 почти не дает начало.
@@ -114,18 +109,15 @@ layout: two-cols
 -->
 
 ---
-layout: image
-image: ./assets/figures/02_overall_orders_by_month.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 04 · Заказы по месяцам, 2017
 
-## Общий спрос растет к Q4
-
-- В 2017 виден выраженный рост к концу года.
-- Ноябрь — ключевой месяц для e-commerce-событий.
-- Общая динамика скрывает различия между категориями.
+<div class="chart-frame">
+<img src="./assets/figures/02_overall_orders_by_month.png" alt="Заказы по месяцам 2017" />
+</div>
 
 <!--
 На уровне всех заказов виден общий рост к Q4. Но это только агрегатная картинка. Она полезна как фон, но по ней нельзя делать операционные выводы для всех категорий сразу.
@@ -133,18 +125,15 @@ backgroundSize: contain
 -->
 
 ---
-layout: image
-image: ./assets/figures/20_detrended_daily_orders_2017.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 05 · Детрендированный дневной спрос
 
-## Событийная сезонность
-
-- Дневные пики выделяются после снятия тренда.
-- Rolling z-score помогает отличить всплеск от общего роста.
-- Black Friday и Q4 видны как отдельный операционный риск.
+<div class="chart-frame">
+<img src="./assets/figures/20_detrended_daily_orders_2017.png" alt="Детрендированный дневной спрос" />
+</div>
 
 <!--
 Здесь важно не спутать тренд и сезонность. Если спрос просто растет весь год, это не то же самое, что повторяемый календарный эффект.
@@ -185,18 +174,15 @@ layout: two-cols
 -->
 
 ---
-layout: image
-image: ./assets/figures/04_top_seasonal_categories_with_peak_month.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 07 · Топ категорий по коэффициенту вариации
 
-## CV показывает силу месячных колебаний
-
-- Высокий CV — сильнее разброс спроса между месяцами.
-- Ноябрь и декабрь часто становятся peak-month.
-- Малые категории требуют фильтра по надежности.
+<div class="chart-frame">
+<img src="./assets/figures/04_top_seasonal_categories_with_peak_month.png" alt="Топ категорий по CV" />
+</div>
 
 <!--
 Коэффициент вариации показывает, насколько сильно месячный спрос колеблется относительно среднего уровня. На этом графике видны категории с самым выраженным профилем.
@@ -204,12 +190,15 @@ backgroundSize: contain
 -->
 
 ---
-layout: image
-image: ./assets/figures/06_category_monthly_seasonal_index_heatmap.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 08 · Теплокарта: месячные индексы по категориям
+
+<div class="chart-frame">
+<img src="./assets/figures/06_category_monthly_seasonal_index_heatmap.png" alt="Теплокарта сезонности" />
+</div>
 
 <!--
 Теплокарта дает более детальную картину: не только какая категория сезонная, но и в какой месяц у нее усиление.
@@ -217,28 +206,15 @@ backgroundSize: contain
 -->
 
 ---
-layout: image-right
-image: ./assets/figures/12_large_purchase_top10_by_month.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
-# 09 · Крупные покупки: доля по месяцам
+# 09 · Крупные покупки по месяцам
 
-## Определение
-
-Крупная покупка: заказ ≥ P90 (~306 BRL).
-
-## Что видно на графике
-
-- топ-10 категорий по выручке крупных покупок по месяцам;
-- пик дорогих покупок не совпадает с пиком массового спроса;
-- январь и Q4 требуют отдельного планирования.
-
-## Бизнес-смысл
-
-- рассрочки и платежи;
-- промо для high-ticket категорий;
-- контроль доставки в пиковые периоды.
+<div class="chart-frame">
+<img src="./assets/figures/12_large_purchase_top10_by_month.png" alt="Крупные покупки top-10 по месяцам" />
+</div>
 
 <!--
 Этот блок отделяет массовый спрос от дорогих покупок. Для бизнеса это разные задачи: пик количества заказов не равен пику дорогой выручки.
@@ -246,18 +222,15 @@ backgroundSize: contain
 -->
 
 ---
-layout: image
-image: ./assets/figures/21_large_purchase_share_ci_2017.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 10 · Доля крупных заказов с доверительными интервалами
 
-## Интерпретация
-
-- Доверительные интервалы показывают, где различия устойчивы.
-- Ноябрь выделяется по дорогим покупкам.
-- Долю крупных заказов нужно читать вместе с общей выручкой.
+<div class="chart-frame">
+<img src="./assets/figures/21_large_purchase_share_ci_2017.png" alt="Доля крупных заказов CI" />
+</div>
 
 <!--
 На графике не просто месячные значения, а значения с доверительными интервалами. Это важно: без интервалов легко переинтерпретировать шум.
@@ -329,18 +302,15 @@ layout: two-cols
 -->
 
 ---
-layout: image
-image: ./assets/figures/16_early_prediction_roc.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 13 · ML-модель: ROC-кривая
 
-## ML как контрпример
-
-- Random Forest на признаках категории не дает надежного решения.
-- ROC-AUC около 0.35 в исходной постановке ниже полезного порога.
-- Более строгий early-signal тест дает ROC-AUC около 0.70, но выборка мала.
+<div class="chart-frame">
+<img src="./assets/figures/16_early_prediction_roc.png" alt="ROC-кривая ML модели" />
+</div>
 
 <!--
 Этот слайд важен как честная проверка. ML не обязан победить просто потому, что это ML.
@@ -410,18 +380,15 @@ layout: two-cols
 -->
 
 ---
-layout: image
-image: ./assets/figures/22_weekday_orders_2017.png
-backgroundSize: contain
+layout: default
+class: chart-slide
 ---
 
 # 16 · Спрос по дням недели, 2017
 
-## Недельный профиль нужен для операций
-
-- Месячная сезонность отвечает “когда пик”.
-- Недельный профиль отвечает “как распределять нагрузку”.
-- Для дорогих покупок weekday-паттерн может отличаться от общего спроса.
+<div class="chart-frame">
+<img src="./assets/figures/22_weekday_orders_2017.png" alt="Спрос по дням недели" />
+</div>
 
 <!--
 Этот график переводит сезонность в операционный ритм. Даже если месяц известен, нагрузка внутри недели распределяется неравномерно.
@@ -503,7 +470,33 @@ class: text-center
 .slidev-layout {
   --slidev-theme-primary: #2563eb;
   color: #172033;
-  background: #f8fafc;
+  background-color: #f8fafc;
+}
+.slidev-layout.chart-slide {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 2rem 1.5rem;
+}
+.slidev-layout.chart-slide h1 {
+  flex: 0 0 auto;
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+}
+.chart-frame {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-frame img {
+  max-width: 100%;
+  max-height: 72vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.35rem;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
 }
 h1 {
   color: #0f172a;

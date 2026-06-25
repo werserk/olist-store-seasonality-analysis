@@ -95,6 +95,30 @@ jobs:
               --only-show-errors
           done < <(find dist -type f -name '*.svg' -print0)
 
+          while IFS= read -r -d '' file; do
+            key="${file#dist/}"
+            aws --endpoint-url="$S3_ENDPOINT" s3 cp "$file" "s3://$S3_BUCKET/$key" \
+              --content-type 'image/png' \
+              --cache-control 'public, max-age=31536000, immutable' \
+              --only-show-errors
+          done < <(find dist -type f -name '*.png' -print0)
+
+          while IFS= read -r -d '' file; do
+            key="${file#dist/}"
+            aws --endpoint-url="$S3_ENDPOINT" s3 cp "$file" "s3://$S3_BUCKET/$key" \
+              --content-type 'image/jpeg' \
+              --cache-control 'public, max-age=31536000, immutable' \
+              --only-show-errors
+          done < <(find dist -type f \( -name '*.jpg' -o -name '*.jpeg' \) -print0)
+
+          while IFS= read -r -d '' file; do
+            key="${file#dist/}"
+            aws --endpoint-url="$S3_ENDPOINT" s3 cp "$file" "s3://$S3_BUCKET/$key" \
+              --content-type 'image/webp' \
+              --cache-control 'public, max-age=31536000, immutable' \
+              --only-show-errors
+          done < <(find dist -type f -name '*.webp' -print0)
+
       - name: Verify production
         run: |
           set -euo pipefail
