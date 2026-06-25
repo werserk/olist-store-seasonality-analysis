@@ -194,14 +194,14 @@ layout: default
 class: chart-slide
 ---
 
-# 08 · Теплокарта: месячные индексы по категориям
+# 08 · Heatmap: сезонность по месяцам и категориям
 
-<div class="chart-frame">
-<img src="./assets/figures/06_category_monthly_seasonal_index_heatmap.png" alt="Теплокарта сезонности" />
+<div class="chart-frame chart-frame--heatmap">
+<img src="./assets/figures/06_category_monthly_seasonal_index_heatmap.png" alt="Heatmap: месячные индексы по категориям" />
 </div>
 
 <!--
-Теплокарта дает более детальную картину: не только какая категория сезонная, но и в какой месяц у нее усиление.
+Тепловая карта (heatmap) дает более детальную картину: не только какая категория сезонная, но и в какой месяц у нее усиление.
 Смысл графика — показать, что категории не должны получать один общий календарный коэффициент. Для прогноза нужен профиль на уровне категории: где пик, где спад, есть ли одиночный всплеск или устойчивый Q4-паттерн.
 -->
 
@@ -475,28 +475,40 @@ class: text-center
 .slidev-layout.chart-slide {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem 2rem 1.5rem;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  padding: 1rem 1.75rem 1.1rem;
+  box-sizing: border-box;
 }
 .slidev-layout.chart-slide h1 {
   flex: 0 0 auto;
-  font-size: 1.35rem;
-  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin: 0 0 0.4rem;
 }
 .chart-frame {
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-height: 0;
+  max-height: calc(100% - 2.6rem);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .chart-frame img {
-  max-width: 100%;
-  max-height: 72vh;
+  display: block;
+  max-width: min(90%, 1040px);
+  max-height: min(100%, 500px);
   width: auto;
   height: auto;
   object-fit: contain;
   border-radius: 0.35rem;
-  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
+}
+.chart-frame--heatmap img {
+  max-width: min(86%, 980px);
+  max-height: min(100%, 440px);
 }
 h1 {
   color: #0f172a;
