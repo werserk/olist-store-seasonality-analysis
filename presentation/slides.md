@@ -62,8 +62,8 @@ layout: two-cols
 -->
 
 ---
-layout: image-right
-image: ./assets/pptx/image14.png
+layout: image
+image: ./assets/figures/01_data_coverage_main_year.png
 backgroundSize: contain
 ---
 
@@ -114,8 +114,8 @@ layout: two-cols
 -->
 
 ---
-layout: image-right
-image: ./assets/pptx/image7.png
+layout: image
+image: ./assets/figures/02_overall_orders_by_month.png
 backgroundSize: contain
 ---
 
@@ -133,8 +133,8 @@ backgroundSize: contain
 -->
 
 ---
-layout: image-right
-image: ./assets/pptx/image5.png
+layout: image
+image: ./assets/figures/20_detrended_daily_orders_2017.png
 backgroundSize: contain
 ---
 
@@ -185,8 +185,8 @@ layout: two-cols
 -->
 
 ---
-layout: image-right
-image: ./assets/pptx/image8.png
+layout: image
+image: ./assets/figures/04_top_seasonal_categories_with_peak_month.png
 backgroundSize: contain
 ---
 
@@ -205,7 +205,7 @@ backgroundSize: contain
 
 ---
 layout: image
-image: ./assets/pptx/image12.png
+image: ./assets/figures/06_category_monthly_seasonal_index_heatmap.png
 backgroundSize: contain
 ---
 
@@ -217,32 +217,28 @@ backgroundSize: contain
 -->
 
 ---
-layout: two-cols
+layout: image-right
+image: ./assets/figures/12_large_purchase_top10_by_month.png
+backgroundSize: contain
 ---
 
 # 09 · Крупные покупки: доля по месяцам
 
-::left::
-
 ## Определение
 
-Крупная покупка: товар или заказ в верхнем ценовом сегменте, около P90.
+Крупная покупка: заказ ≥ P90 (~306 BRL).
 
-## Что проверяем
+## Что видно на графике
 
-- меняется ли доля дорогих покупок по месяцам;
-- совпадает ли пик дорогих покупок с пиком заказов;
-- какие категории формируют expensive-goods revenue.
-
-::right::
+- топ-10 категорий по выручке крупных покупок по месяцам;
+- пик дорогих покупок не совпадает с пиком массового спроса;
+- январь и Q4 требуют отдельного планирования.
 
 ## Бизнес-смысл
 
-Крупные покупки требуют отдельного планирования:
-
 - рассрочки и платежи;
 - промо для high-ticket категорий;
-- контроль доставки и отзывов в пиковые периоды.
+- контроль доставки в пиковые периоды.
 
 <!--
 Этот блок отделяет массовый спрос от дорогих покупок. Для бизнеса это разные задачи: пик количества заказов не равен пику дорогой выручки.
@@ -250,8 +246,8 @@ layout: two-cols
 -->
 
 ---
-layout: image-right
-image: ./assets/pptx/image10.png
+layout: image
+image: ./assets/figures/21_large_purchase_share_ci_2017.png
 backgroundSize: contain
 ---
 
@@ -333,8 +329,8 @@ layout: two-cols
 -->
 
 ---
-layout: image-right
-image: ./assets/pptx/image9.png
+layout: image
+image: ./assets/figures/16_early_prediction_roc.png
 backgroundSize: contain
 ---
 
@@ -414,8 +410,8 @@ layout: two-cols
 -->
 
 ---
-layout: image-right
-image: ./assets/pptx/image11.png
+layout: image
+image: ./assets/figures/22_weekday_orders_2017.png
 backgroundSize: contain
 ---
 

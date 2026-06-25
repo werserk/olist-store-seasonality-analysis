@@ -18,8 +18,14 @@ Speaker text is duplicated in two places:
 
 Assets:
 
-- `assets/pptx/` — images extracted from the original PPTX;
-- `assets/figures/` — cleaned project figures copied from `results/final_figure_set/`.
+- `assets/figures/` — project figures (`results/final_figure_set/` + pres exports);
+- `assets/pptx/` — legacy PPTX extracts (not used in `slides.md`).
+
+Refresh figures before deploy:
+
+```bash
+python scripts/sync_slidev_figures.py
+```
 
 ## Deployment
 
