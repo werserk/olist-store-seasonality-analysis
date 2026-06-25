@@ -452,6 +452,84 @@
   font-weight: 620;
 }
 
+.slidev-layout.large-method-slide,
+.slidev-layout.large-months-slide,
+.slidev-layout.large-effect-slide,
+.slidev-layout.large-answer-slide {
+  display: grid !important;
+  grid-template-rows: min-content minmax(0, 1fr) !important;
+  gap: 1.2rem;
+  padding: 2.4rem 3.2rem 2.2rem !important;
+}
+
+.slidev-layout.large-method-slide h1,
+.slidev-layout.large-months-slide h1,
+.slidev-layout.large-effect-slide h1,
+.slidev-layout.large-answer-slide h1 {
+  margin: 0 !important;
+}
+
+.large-method-grid,
+.large-months-grid,
+.large-effect-grid {
+  min-height: 0;
+  display: grid;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.large-method-grid {
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  align-items: start;
+}
+
+.large-months-grid,
+.large-effect-grid {
+  grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+}
+
+.large-facts {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.large-facts > div {
+  color: #202020;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.large-facts span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #555555;
+  font-size: 0.72rem;
+  font-weight: 680;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.slidev-layout.large-months-slide .chart-frame,
+.slidev-layout.large-effect-slide .chart-frame {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slidev-layout.large-months-slide .chart-frame img,
+.slidev-layout.large-effect-slide .chart-frame img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  border-radius: 0.35rem;
+}
+
 .slidev-layout.dataset-slide {
   display: grid !important;
   grid-template-rows: min-content min-content minmax(0, 1fr) !important;
@@ -741,6 +819,14 @@ html.dark .answer-evidence > div {
 
 html.dark .profile-facts span,
 html.dark .answer-evidence span {
+  color: #c7c7c7;
+}
+
+html.dark .large-facts > div {
+  color: #e5e5e5;
+}
+
+html.dark .large-facts span {
   color: #c7c7c7;
 }
 
