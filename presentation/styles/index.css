@@ -277,6 +277,102 @@
   border-radius: 0.35rem;
 }
 
+.slidev-layout.seasonal-categories-slide {
+  display: grid !important;
+  grid-template-rows: min-content minmax(0, 1fr) !important;
+  gap: 1.1rem;
+  padding: 2.4rem 3.1rem 2.2rem !important;
+}
+
+.slidev-layout.seasonal-categories-slide h1 {
+  margin: 0 !important;
+}
+
+.seasonal-categories-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.score-formula {
+  margin-bottom: 0.9rem;
+  color: #202020;
+  font-size: 0.96rem;
+  line-height: 1.35;
+}
+
+.score-formula span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #555555;
+  font-size: 0.72rem;
+  font-weight: 680;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.seasonal-categories-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #202020;
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+.seasonal-categories-table th,
+.seasonal-categories-table td {
+  border-bottom: 1px solid #d4d4d4;
+  padding: 0.38rem 0.42rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.seasonal-categories-table th {
+  color: #555555;
+  font-size: 0.66rem;
+  font-weight: 680;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.seasonal-categories-table th:nth-child(n+2),
+.seasonal-categories-table td:nth-child(n+2) {
+  text-align: right;
+}
+
+.seasonal-categories-table code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.seasonal-filter-note {
+  margin-top: 0.75rem;
+  color: #555555;
+  font-size: 0.76rem;
+  line-height: 1.3;
+}
+
+.slidev-layout.seasonal-categories-slide .chart-frame {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slidev-layout.seasonal-categories-slide .chart-frame img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  border-radius: 0.35rem;
+}
+
 .slidev-layout.dataset-slide {
   display: grid !important;
   grid-template-rows: min-content min-content minmax(0, 1fr) !important;
@@ -545,6 +641,22 @@ html.dark .demand-facts > div {
 
 html.dark .demand-facts span {
   color: #c7c7c7;
+}
+
+html.dark .score-formula,
+html.dark .seasonal-categories-table {
+  color: #e5e5e5;
+}
+
+html.dark .score-formula span,
+html.dark .seasonal-categories-table th,
+html.dark .seasonal-filter-note {
+  color: #c7c7c7;
+}
+
+html.dark .seasonal-categories-table th,
+html.dark .seasonal-categories-table td {
+  border-bottom-color: #525252;
 }
 
 html.dark .coverage-copy,

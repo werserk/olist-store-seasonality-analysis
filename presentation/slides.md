@@ -227,6 +227,53 @@ class: demand-slide
 -->
 
 ---
+layout: default
+class: seasonal-categories-slide
+---
+
+# Самые сезонные категории
+
+<div class="seasonal-categories-grid">
+<div>
+<div class="score-formula">
+<span>Seasonality score</span>
+CV = σ(месячного спроса) / μ(месячного спроса)
+</div>
+
+<table class="seasonal-categories-table">
+<thead>
+<tr><th>Категория</th><th>Пик</th><th>Score</th><th>Пик / средний</th></tr>
+</thead>
+<tbody>
+<tr><td><code>computers</code></td><td>сен</td><td>1,33</td><td>3,9</td></tr>
+<tr><td><code>construction_tools_construction</code></td><td>ноя</td><td>1,25</td><td>4,3</td></tr>
+<tr><td><code>home_construction</code></td><td>ноя</td><td>1,15</td><td>3,6</td></tr>
+<tr><td><code>food_drink</code></td><td>ноя</td><td>0,93</td><td>3,2</td></tr>
+<tr><td><code>kitchen_dining_laundry_garden_furniture</code></td><td>ноя</td><td>0,83</td><td>3,2</td></tr>
+<tr><td><code>stationery</code></td><td>дек</td><td>0,78</td><td>3,1</td></tr>
+</tbody>
+</table>
+<div class="seasonal-filter-note">В рейтинг включены категории с уровнем достоверности medium или high.</div>
+</div>
+
+<div class="chart-frame">
+<img src="./assets/figures/04_top_seasonal_categories_with_peak_month.png" alt="Рейтинг сезонных категорий по coefficient of variation" />
+</div>
+</div>
+
+<!--
+После общей динамики переходим к категориям.
+
+Для каждой категории мы рассчитали seasonality score как коэффициент вариации месячного спроса: стандартное отклонение делится на среднее. Чем выше значение, тем сильнее спрос категории меняется между месяцами.
+
+В рейтинг включены только категории с достаточным числом заказов и активных месяцев. Это нужно, чтобы случайные всплески малых категорий не попадали в ответ как сезонность.
+
+Верхние позиции занимают категории, где пиковый месяц в несколько раз выше обычного уровня. Например, у construction_tools_construction ноябрьский пик в 4,3 раза выше среднего месяца, у computers сентябрьский пик в 3,9 раза выше среднего.
+
+Значит, сезонность в Olist Store лучше видна на уровне отдельных товарных категорий, а не только на общей кривой спроса.
+-->
+
+---
 layout: center
 class: text-center
 ---
