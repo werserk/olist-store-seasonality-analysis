@@ -6,6 +6,7 @@ info: |
 class: text-left
 highlighter: shiki
 transition: none
+colorSchema: auto
 mdc: true
 canvasWidth: 1280
 aspectRatio: 16/9

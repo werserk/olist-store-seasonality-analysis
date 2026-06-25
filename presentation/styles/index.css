@@ -1,7 +1,7 @@
 .slidev-layout {
   --slidev-theme-primary: #2563eb;
   color: #172033;
-  background-color: #f8fafc;
+  background-color: #ffffff;
 }
 
 .slidev-page:has(.chart-slide) {
@@ -65,7 +65,7 @@ h3 {
 
 .slidev-layout.cover,
 .slidev-layout.center {
-  background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 42%, #ffffff 100%);
+  background: #ffffff;
 }
 
 .callout {
@@ -116,4 +116,48 @@ li {
   background: transparent !important;
   color: inherit !important;
   padding: 0;
+}
+
+html.dark .slidev-layout {
+  color: #e5e7eb;
+  background-color: #1f2937;
+}
+
+html.dark h1 {
+  color: #f8fafc;
+}
+
+html.dark h2,
+html.dark h3 {
+  color: #93c5fd;
+}
+
+html.dark .slidev-layout.cover,
+html.dark .slidev-layout.center {
+  background: #1f2937;
+}
+
+html.dark .slidev-layout.chart-slide .chart-frame img {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
+}
+
+html.dark .callout {
+  background: rgba(96, 165, 250, 0.14);
+  color: #f8fafc;
+  border-left-color: #60a5fa;
+}
+
+html.dark .slidev-layout :not(pre) > code,
+html.dark .slidev-layout p code,
+html.dark .slidev-layout li code,
+html.dark .slidev-layout td code,
+html.dark .slidev-layout th code {
+  background-color: #374151 !important;
+  color: #f8fafc !important;
+}
+
+html.dark .slidev-layout pre {
+  background-color: #111827 !important;
+  color: #f8fafc !important;
+  border-color: #4b5563;
 }
