@@ -456,6 +456,8 @@
 .slidev-layout.large-months-slide,
 .slidev-layout.large-effect-slide,
 .slidev-layout.large-answer-slide,
+.slidev-layout.business-impact-slide,
+.slidev-layout.business-revenue-slide,
 .slidev-layout.prediction-result-slide,
 .slidev-layout.prediction-features-slide {
   display: grid !important;
@@ -468,6 +470,8 @@
 .slidev-layout.large-months-slide h1,
 .slidev-layout.large-effect-slide h1,
 .slidev-layout.large-answer-slide h1,
+.slidev-layout.business-impact-slide h1,
+.slidev-layout.business-revenue-slide h1,
 .slidev-layout.prediction-result-slide h1,
 .slidev-layout.prediction-features-slide h1 {
   margin: 0 !important;
@@ -476,6 +480,8 @@
 .large-method-grid,
 .large-months-grid,
 .large-effect-grid,
+.business-impact-grid,
+.business-revenue-grid,
 .prediction-grid {
   min-height: 0;
   display: grid;
@@ -490,17 +496,23 @@
 
 .large-months-grid,
 .large-effect-grid,
+.business-impact-grid,
+.business-revenue-grid,
 .prediction-grid {
   grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
 }
 
 .large-facts,
+.business-facts,
+.business-revenue-tables,
 .prediction-facts {
   display: grid;
   gap: 0.95rem;
 }
 
 .large-facts > div,
+.business-facts > div,
+.business-revenue-tables > div,
 .prediction-facts > div {
   color: #202020;
   font-size: 0.98rem;
@@ -508,6 +520,8 @@
 }
 
 .large-facts span,
+.business-facts span,
+.business-revenue-tables span,
 .prediction-facts span {
   display: block;
   margin-bottom: 0.2rem;
@@ -520,6 +534,8 @@
 
 .slidev-layout.large-months-slide .chart-frame,
 .slidev-layout.large-effect-slide .chart-frame,
+.slidev-layout.business-impact-slide .chart-frame,
+.slidev-layout.business-revenue-slide .chart-frame,
 .slidev-layout.prediction-result-slide .chart-frame,
 .slidev-layout.prediction-features-slide .chart-frame {
   min-height: 0;
@@ -531,6 +547,8 @@
 
 .slidev-layout.large-months-slide .chart-frame img,
 .slidev-layout.large-effect-slide .chart-frame img,
+.slidev-layout.business-impact-slide .chart-frame img,
+.slidev-layout.business-revenue-slide .chart-frame img,
 .slidev-layout.prediction-result-slide .chart-frame img,
 .slidev-layout.prediction-features-slide .chart-frame img {
   display: block;
@@ -836,11 +854,15 @@ html.dark .answer-evidence span {
 }
 
 html.dark .large-facts > div,
+html.dark .business-facts > div,
+html.dark .business-revenue-tables > div,
 html.dark .prediction-facts > div {
   color: #e5e5e5;
 }
 
 html.dark .large-facts span,
+html.dark .business-facts span,
+html.dark .business-revenue-tables span,
 html.dark .prediction-facts span {
   color: #c7c7c7;
 }
