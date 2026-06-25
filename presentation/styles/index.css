@@ -373,6 +373,85 @@
   border-radius: 0.35rem;
 }
 
+.slidev-layout.seasonal-profiles-slide,
+.slidev-layout.answer-slide {
+  display: grid !important;
+  grid-template-rows: min-content minmax(0, 1fr) !important;
+  gap: 1.2rem;
+  padding: 2.4rem 3.2rem 2.2rem !important;
+}
+
+.slidev-layout.seasonal-profiles-slide h1,
+.slidev-layout.answer-slide h1 {
+  margin: 0 !important;
+}
+
+.seasonal-profiles-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.profile-facts,
+.answer-evidence {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.profile-facts > div,
+.answer-evidence > div {
+  color: #202020;
+  font-size: 0.96rem;
+  line-height: 1.35;
+}
+
+.profile-facts span,
+.answer-evidence span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #555555;
+  font-size: 0.72rem;
+  font-weight: 680;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.slidev-layout.seasonal-profiles-slide .chart-frame {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slidev-layout.seasonal-profiles-slide .chart-frame img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  border-radius: 0.35rem;
+}
+
+.answer-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.answer-main {
+  color: #202020;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  font-weight: 620;
+}
+
 .slidev-layout.dataset-slide {
   display: grid !important;
   grid-template-rows: min-content min-content minmax(0, 1fr) !important;
@@ -651,6 +730,17 @@ html.dark .seasonal-categories-table {
 html.dark .score-formula span,
 html.dark .seasonal-categories-table th,
 html.dark .seasonal-filter-note {
+  color: #c7c7c7;
+}
+
+html.dark .profile-facts > div,
+html.dark .answer-main,
+html.dark .answer-evidence > div {
+  color: #e5e5e5;
+}
+
+html.dark .profile-facts span,
+html.dark .answer-evidence span {
   color: #c7c7c7;
 }
 
