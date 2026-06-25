@@ -5,7 +5,8 @@ Source of truth: `slides.md`.
 Planning helpers for restructuring:
 
 - `assignment-questions.md` — exact main and additional questions from the assignment;
-- `current-structure.md` — current slide-by-slide structure before the planned rewrite.
+- `current-structure.md` — current slide-by-slide structure before the planned rewrite;
+- `proposed-question-driven-structure.md` — draft of the new question-driven presentation flow.
 
 ## Commands
 
