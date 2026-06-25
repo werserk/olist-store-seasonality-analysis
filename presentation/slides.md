@@ -497,7 +497,7 @@ class: method-slide
 </div>
 
 <div class="method-steps">
-<div><span>1</span>Цель: <code>is_seasonal</code> = верхний квартиль по seasonality score</div>
+<div><span>1</span>Цель: is_seasonal = верхний квартиль по seasonality score</div>
 <div><span>2</span>Уровень анализа: категория, не отдельный SKU</div>
 <div><span>3</span>Baseline: признаки за весь период</div>
 <div><span>4</span>Early model: Jan–Jun → Jul–Dec</div>

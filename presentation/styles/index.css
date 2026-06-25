@@ -561,6 +561,15 @@
   border-radius: 0.35rem;
 }
 
+.slidev-layout.prediction-result-slide .chart-frame {
+  align-items: flex-start;
+  padding-top: 1.6rem;
+}
+
+.slidev-layout.prediction-result-slide .chart-frame img {
+  max-height: 24rem;
+}
+
 .slidev-layout.dataset-slide {
   display: grid !important;
   grid-template-rows: min-content min-content minmax(0, 1fr) !important;
