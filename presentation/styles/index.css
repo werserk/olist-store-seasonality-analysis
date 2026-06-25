@@ -53,12 +53,43 @@
 .slidev-layout.dataset-slide {
   display: grid !important;
   grid-template-rows: min-content minmax(0, 1fr) !important;
-  gap: 1.3rem;
+  gap: 1.5rem;
   padding: 3rem 4rem 2.4rem !important;
 }
 
 .slidev-layout.dataset-slide h1 {
   margin: 0 !important;
+}
+
+.dataset-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.dataset-copy {
+  max-width: 25rem;
+  color: #202020;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.dataset-copy p {
+  margin: 0 0 1.15rem;
+}
+
+.dataset-footnote {
+  margin-top: 2.2rem;
+  color: #555555;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.dataset-diagram {
+  min-width: 0;
+  min-height: 0;
 }
 
 .slidev-layout.dataset-slide .mermaid {
@@ -70,7 +101,7 @@
 }
 
 .slidev-layout.dataset-slide .mermaid svg {
-  max-width: 86%;
+  max-width: 100%;
   max-height: 100%;
 }
 
@@ -231,4 +262,12 @@ html.dark .slidev-layout.dataset-slide .mermaid .flowchart-link {
 html.dark .slidev-layout.dataset-slide .mermaid marker path {
   fill: #737373 !important;
   stroke: #737373 !important;
+}
+
+html.dark .dataset-copy {
+  color: #e5e5e5;
+}
+
+html.dark .dataset-footnote {
+  color: #c7c7c7;
 }
