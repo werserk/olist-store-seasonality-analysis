@@ -48,7 +48,6 @@
   object-fit: contain;
   object-position: center center;
   border-radius: 0.35rem;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
 }
 
 h1 {
@@ -135,10 +134,6 @@ html.dark h3 {
 html.dark .slidev-layout.cover,
 html.dark .slidev-layout.center {
   background: #1f2937;
-}
-
-html.dark .slidev-layout.chart-slide .chart-frame img {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
 }
 
 html.dark .callout {
