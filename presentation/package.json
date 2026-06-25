@@ -3,6 +3,7 @@
     "dev": "slidev slides.md --host 0.0.0.0",
     "build": "slidev build slides.md --out dist --base /",
     "preview": "slidev build slides.md --out dist --base / && npx --yes serve dist -l 3030",
+    "verify:charts": "python ../scripts/verify_slidev_chart_fit.py --serve",
     "export:pdf": "slidev export slides.md --format pdf --output exports/olist-seasonality.pdf"
   },
   "dependencies": {
