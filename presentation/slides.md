@@ -1,6 +1,6 @@
 ---
 theme: default
-title: Сезонность продаж Olist Store
+title: Анализ сезонности в Olist Store
 info: |
   Question-driven Slidev presentation for the Olist Store seasonality analysis project.
 class: text-left
@@ -13,56 +13,43 @@ aspectRatio: 16/9
 fonts:
   sans: Inter
   mono: JetBrains Mono
+mermaid:
+  theme: neutral
 ---
 
-# Сезонность продаж Olist Store
+# Анализ сезонности в Olist Store
 
-## Brazilian E-Commerce · 2016–2018
+<div>Бразильский маркетплейс электронной коммерции</div>
+<div>Открытый набор данных за 2016–2018 годы</div>
 
-Как сезонность влияет на спрос, продажи, прогноз и крупные покупки
-
-<div class="mt-16 text-sm opacity-70">Olist Brazilian E-Commerce Public Dataset · delivered-заказы</div>
+<div class="mt-44 text-sm opacity-70">Александр @alxadrb · Тимур @coucco · Максим @werserk</div>
 
 <!--
-Вступление. Это новая версия презентации: она строится не по списку анализов, а по вопросам задания. Сегодня сначала коротко объясняем кейс и данные, затем показываем четыре вопроса, а дальше каждый блок будет отвечать на один вопрос по схеме: вопрос, метод, доказательства, ответ.
+Титульный слайд. Коротко объявляем выбранный кейс без методологии, метрик и выводов.
 -->
 
 ---
-layout: two-cols
+layout: default
+class: dataset-slide
 ---
 
-# 00 · Что за кейс
+# Что есть в данных
 
-::left::
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ffffff", "primaryTextColor": "#202020", "primaryBorderColor": "#9a9a9a", "lineColor": "#707070", "secondaryColor": "#ffffff", "tertiaryColor": "#ffffff"}}}%%
+flowchart TB
+    customers[Покупатели] --> orders[Заказы]
+    orders --> items[Товары в заказах]
+    items --> products[Товары]
+    products --> categories[Категории]
 
-## Olist Store
-
-Бразильский e-commerce marketplace: продавцы размещают товары, покупатели оформляют заказы, Olist связывает покупку, оплату, доставку и отзывы.
-
-## Что анализируем
-
-- продажи за 2016–2018;
-- только `delivered`-заказы;
-- товары и категории;
-- платежи, доставка, отзывы.
-
-::right::
-
-## Как связаны данные
-
-```text
-orders
-  → order_items
-  → products / categories
-  → payments
-  → customers / geography
-  → delivery / reviews
+    orders --> payments[Платежи]
+    orders --> delivery[Доставка]
+    orders --> reviews[Отзывы]
 ```
 
-<div class="callout">Кейс про то, где сезонность полезна для решений: прогноз, промо, inventory, high-ticket planning.</div>
-
 <!--
-Здесь важно не уходить в техническую схему датасета. Достаточно показать, что у нас есть не только заказы, но и категории, платежи, доставка и отзывы. Поэтому мы можем отвечать не только про спрос, но и про бизнес-метрики и крупные покупки.
+Слайд показывает состав датасета на уровне сущностей. Без методологии, метрик, пересказа схемы и английских названий таблиц.
 -->
 
 ---
