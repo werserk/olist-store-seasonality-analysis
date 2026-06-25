@@ -50,6 +50,26 @@
   border-radius: 0.35rem;
 }
 
+.title-questions {
+  display: grid;
+  gap: 1rem;
+  max-width: 52rem;
+  margin-top: 3.4rem;
+  color: #202020;
+  font-size: 1.02rem;
+  line-height: 1.4;
+}
+
+.title-questions span {
+  display: block;
+  margin-bottom: 0.24rem;
+  color: #555555;
+  font-size: 0.78rem;
+  font-weight: 680;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
 .slidev-layout.coverage-slide {
   display: grid !important;
   grid-template-rows: min-content minmax(0, 1fr) !important;
@@ -373,6 +393,14 @@ html.dark .callout {
   background: rgba(255, 255, 255, 0.1);
   color: #fafafa;
   border-left-color: #a3a3a3;
+}
+
+html.dark .title-questions {
+  color: #e5e5e5;
+}
+
+html.dark .title-questions span {
+  color: #c7c7c7;
 }
 
 html.dark .coverage-copy,
