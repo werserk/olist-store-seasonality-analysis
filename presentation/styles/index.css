@@ -452,6 +452,7 @@
   font-weight: 620;
 }
 
+.slidev-layout.large-method-slide,
 .slidev-layout.large-months-slide,
 .slidev-layout.large-effect-slide,
 .slidev-layout.large-answer-slide {
@@ -461,18 +462,25 @@
   padding: 2.4rem 3.2rem 2.2rem !important;
 }
 
+.slidev-layout.large-method-slide h1,
 .slidev-layout.large-months-slide h1,
 .slidev-layout.large-effect-slide h1,
 .slidev-layout.large-answer-slide h1 {
   margin: 0 !important;
 }
 
+.large-method-grid,
 .large-months-grid,
 .large-effect-grid {
   min-height: 0;
   display: grid;
   gap: 2.2rem;
   align-items: center;
+}
+
+.large-method-grid {
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  align-items: start;
 }
 
 .large-months-grid,
