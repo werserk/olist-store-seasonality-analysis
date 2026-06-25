@@ -2,6 +2,11 @@
 
 Source of truth: `slides.md`.
 
+Planning helpers for restructuring:
+
+- `assignment-questions.md` — exact main and additional questions from the assignment;
+- `current-structure.md` — current slide-by-slide structure before the planned rewrite.
+
 ## Commands
 
 ```bash
