@@ -36,6 +36,10 @@ results/speaker_notes.md
 results/presentation_olist_seasonality.pptx
 notes/presentation_script.md
 *.pptx
+presentation/node_modules/
+presentation/dist/
+presentation/exports/
+presentation/extracted/
 
 # OS/editor
 .DS_Store
