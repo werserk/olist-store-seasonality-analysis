@@ -81,3 +81,39 @@ h3 {
 li {
   margin-bottom: 0.35rem;
 }
+
+/* Inline code on light slides (default theme uses dark code chips). */
+.slidev-layout :not(pre) > code,
+.slidev-layout p code,
+.slidev-layout li code,
+.slidev-layout td code,
+.slidev-layout th code {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  padding: 0.12em 0.38em;
+  border-radius: 0.25rem;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  font-weight: 500;
+  box-shadow: none !important;
+}
+
+.slidev-layout :not(pre) > code span,
+.slidev-layout p code span,
+.slidev-layout li code span {
+  color: inherit !important;
+  background: transparent !important;
+}
+
+.slidev-layout pre {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+}
+
+.slidev-layout pre code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0;
+}
