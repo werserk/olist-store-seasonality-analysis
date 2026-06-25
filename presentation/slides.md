@@ -5,7 +5,7 @@ info: |
   Slidev-версия презентации по проекту Olist Store seasonality analysis.
 class: text-left
 highlighter: shiki
-transition: fade-out
+transition: none
 mdc: true
 canvasWidth: 1280
 aspectRatio: 16/9
